@@ -1,0 +1,33 @@
+{
+  "name": "shop-cooldown-bot",
+  "version": "1.0.0",
+  "description": "Discord bot for managing shop cooldowns with slash commands",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "node src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "discord",
+    "bot"
+  ],
+  "author": "Your Name",
+  "license": "ISC",
+  "bin": "src/index.js",
+  "pkg": {
+    "scripts": "src/**/*.js",
+    "assets": [".env"],
+    "outputPath": "dist"
+  },
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "node src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "pkg . --targets node18-win-x64 --output dist/shop-cooldown-bot.exe"
+  },
+  "dependencies": {
+    "discord.js": "^14.21.0",
+    "dotenv": "^16.6.1"
+  }
+}
