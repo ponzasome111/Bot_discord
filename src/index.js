@@ -19,8 +19,8 @@ const dateFormatter = new Intl.DateTimeFormat('th-TH', {
 });
 
 const shops = Object.freeze([
-    'ร้านทะเลทราย',
-    'ร้านไก่'
+    'ร้านจีน',
+    'ร้านบ้านหัวใจ'
 ]);
 const shopChoices = shops.map(shop => ({ name: shop, value: shop }));
 
@@ -31,13 +31,7 @@ const client = new Client({
         GatewayIntentBits.MessageContent,
     ],
     allowedMentions: { parse: [] },
-    partials: [],
-    makeCache: (manager) => {
-        if (manager.name === 'GuildManager') return new Map();
-        if (manager.name === 'ChannelManager') return new Map();
-        if (manager.name === 'MessageManager') return new Map();
-        return new Map();
-    }
+    partials: []
 });
 
 client.once('ready', async () => {
