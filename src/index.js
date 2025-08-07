@@ -494,16 +494,21 @@ setInterval(async () => {
         console.log(`ทำความสะอาดคูลดาวน์ ${shop} เนื่องจากไม่สามารถเข้าถึงข้อความได้`);
         cleanupCooldown(shop);
     }
-}, 5000);
+}, 30000); // เปลี่ยนจาก 5000ms เป็น 30000ms (30 วินาที)
 
 setInterval(() => {
-    cleanupCaches();
-}, CACHE_CLEANUP_INTERVAL);
+    if (messageCache.size > 0 || channelCache.size > 0) {
+        cleanupCaches();
+    }
+}, 600000); // เปลี่ยนจาก 300000ms เป็น 600000ms (10 นาที)
 
 setInterval(() => {
-    forceGarbageCollection();
-    console.log(`Memory usage check - Heap used: ${Math.round(process.memoryUsage().heapUsed / 1024 / 1024)}MB`);
-}, 604800000);
+    const heapUsed = process.memoryUsage().heapUsed;
+    if (heapUsed > 100 * 1024 * 1024) { // ถ้าใช้ RAM เกิน 100MB
+        forceGarbageCollection();
+        console.log(`Memory usage check - Heap used: ${Math.round(heapUsed / 1024 / 1024)}MB`);
+    }
+}, 1800000); // เปลี่ยนจาก 604800000ms เป็น 1800000ms (30 นาที)
 
 process.on('SIGINT', () => {
     console.log('Received SIGINT, cleaning up...');
